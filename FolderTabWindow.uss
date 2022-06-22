@@ -1,0 +1,31 @@
+.item:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.active .item__label {
+    color: white;
+    background-color: rgba(55, 105, 205, 0.6);
+}
+
+.hidden {
+    display: none;
+}
+
+#ObjectPanel {
+    max-height: 0;
+    padding-top: 0;
+}
+
+#ObjectPanel.show {
+    max-height: 162px;
+    padding-top: 10px;
+}
+
+#ObjectPanel > * {
+    margin-bottom: 3px;
+}
+
+#ObjectPanel > Toggle {
+    margin-top: 4px;
+    margin-bottom: 5px;
+}
