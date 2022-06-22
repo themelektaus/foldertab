@@ -621,7 +621,7 @@ namespace FolderTab.Editor
             var assetPath = AssetDatabase.GetAssetPath(UnityEditor.Selection.activeObject);
             var assetRootPath = assetPath[6..].Trim('/');
             
-            var path = "Assets/Folder Tab";
+            var path = "Assets/FolderTab";
             foreach (var file in System.IO.Directory.GetFiles(path, "*.asset"))
             {
                 var asset = AssetDatabase.LoadAssetAtPath<FolderTabObject>(file);

@@ -34,7 +34,7 @@ namespace FolderTab.Editor
         {
             if (!icons.ContainsKey(name))
             {
-                var path = $"Assets/MT Packages/Folder Tab/Editor/Icons/{name} Icon.png";
+                var path = $"Assets/MT Packages/FolderTab/Icons/{name} Icon.png";
                 if (System.IO.File.Exists(path))
                     icons.Add(name, AssetDatabase.LoadAssetAtPath<Texture2D>(path));
                 else
