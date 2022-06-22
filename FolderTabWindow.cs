@@ -620,16 +620,17 @@ namespace FolderTab.Editor
         {
             var assetPath = AssetDatabase.GetAssetPath(UnityEditor.Selection.activeObject);
             var assetRootPath = assetPath[6..].Trim('/');
-            
-            var path = "Assets/FolderTab";
-            foreach (var file in System.IO.Directory.GetFiles(path, "*.asset"))
+
+            var assetsPath = "Assets";
+
+            foreach (var file in System.IO.Directory.GetFiles(assetsPath, "*.asset"))
             {
                 var asset = AssetDatabase.LoadAssetAtPath<FolderTabObject>(file);
                 if (!asset || asset.rootPath.Trim('/') == assetRootPath)
-                    return (path, assetRootPath, asset);
+                    return (assetsPath, assetRootPath, asset);
             }
 
-            return (path, assetRootPath, null);
+            return (assetsPath, assetRootPath, null);
         }
 
 
