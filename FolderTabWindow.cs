@@ -47,7 +47,7 @@ namespace FolderTab.Editor
 
         public struct Selection
         {
-            public static Selection nothing => new Selection { index = -1 };
+            public static Selection nothing => new() { index = -1 };
 
             public FolderTabItemElement itemElement;
             public int index;
@@ -278,7 +278,7 @@ namespace FolderTab.Editor
             objectPanel.Unbind();
 
             //--------------------------------------------------
-            // Is this needed?                
+            // MyTODO: Is this needed?                
             //--------------------------------------------------
             // if (serializedObject != null)
             // {
@@ -340,18 +340,7 @@ namespace FolderTab.Editor
             FolderTabItemElement itemElement;
 
             if (!folderTabObject.AssetPathExists())
-            {
-                //itemElements.Add(new Label("Path not found")
-                //{
-                //    style = {
-                //        unityFontStyleAndWeight = FontStyle.Bold,
-                //        color = new Color(.9f, .4f, .1f, 1),
-                //        marginTop = 10,
-                //        marginLeft = 8
-                //    }
-                //});
                 return;
-            }
 
             for (int i = 0; i < CHUNK_SIZE && itemElementsLoaded < itemInfos.Count; i++, itemElementsLoaded++)
             {

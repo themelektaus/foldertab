@@ -9,7 +9,7 @@ namespace FolderTab.Editor
     {
         static readonly Dictionary<string, VisualTreeAsset> visualTreeAssets = new();
 
-        // TODO: Needs a better solution
+        // MyTODO: Needs a "better" solution
         public static TemplateContainer LoadVisualTreeAsset(object obj)
         {
             var name = obj.GetType().Name;
