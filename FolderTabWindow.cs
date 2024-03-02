@@ -11,7 +11,7 @@ namespace FolderTab.Editor
     public class FolderTabWindow : EditorWindow
     {
         const float DRAG_DISTANCE = 7;
-        const int CHUNK_SIZE = 100;
+        const int CHUNK_SIZE = 50;
 
 
 
@@ -26,7 +26,7 @@ namespace FolderTab.Editor
 
         readonly List<FolderTabItemElement> itemElements = new();
 
-        VisualElement itemElementsContainer;
+        ScrollView itemElementsContainer;
         int itemElementsLoaded;
 
         ToolbarMenu assetMenu;
@@ -72,13 +72,13 @@ namespace FolderTab.Editor
             root.Add(tree);
             tree.StretchToParentSize();
 
-            itemElementsContainer = root.Q("Items");
+            itemElementsContainer = root.Q<ScrollView>("Items");
 
             assetMenu = root.Q<ToolbarMenu>("AssetMenu");
 
             loadMoreButton = root.Q<Button>("LoadMoreButton");
             loadMoreButton.AddToClassList("hidden");
-            loadMoreButton.clicked += AddItemElements;
+            loadMoreButton.clicked += () => AddItemElements(scrollDown: true);
 
             backButton = root.Q<ToolbarButton>("BackButton");
             backButton.clicked += BackButton_clicked;
@@ -106,7 +106,7 @@ namespace FolderTab.Editor
                     Refresh();
                     return;
                 }
-                
+
                 RefreshSelectionElement();
             });
 
@@ -263,7 +263,7 @@ namespace FolderTab.Editor
             RefreshItemInfos();
 
             ClearItemElements();
-            AddItemElements();
+            AddItemElements(scrollDown: false);
 
             RefreshSelectionElement();
 
@@ -332,7 +332,7 @@ namespace FolderTab.Editor
             itemElementsLoaded = 0;
         }
 
-        void AddItemElements()
+        void AddItemElements(bool scrollDown)
         {
             if (!folderTabObject)
                 return;
@@ -410,6 +410,9 @@ namespace FolderTab.Editor
                 itemElementsContainer.Add(itemElement);
             }
 
+            if (scrollDown)
+                itemElementsContainer.scrollOffset = new(0, int.MaxValue);
+
             if (itemElementsLoaded < itemInfos.Count)
             {
                 loadMoreButton.RemoveFromClassList("hidden");
@@ -446,7 +449,7 @@ namespace FolderTab.Editor
             }
 
             var itemElement = itemElements.FirstOrDefault(x => x.itemInfo == itemInfo);
-            
+
             selection = new Selection
             {
                 itemElement = itemElement,
